@@ -37,3 +37,5 @@ ecommerce-backend/.vscode/
 /.idea/compiler.xml
 /.idea/encodings.xml
 /.idea/jarRepositories.xml
+
+ecommerce-frontend/angular-ecommerce/.vscode
