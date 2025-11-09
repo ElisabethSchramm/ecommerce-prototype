@@ -7,7 +7,7 @@ import { ProductService } from 'src/app/services/product';
 @Component({
   selector: 'app-product-list',
   imports: [CommonModule, CurrencyPipe], 
-  templateUrl: './product-list.html',
+  templateUrl: './product-list-table.html',
   styleUrl: './product-list.css',
 })
 
