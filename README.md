@@ -1,9 +1,16 @@
 # Ecommerce Prototype
 
+## Release 2.0
+- New **Cart CRUD Feature**:
+  - Add products to the cart
+  - View the cart
+  - Update product quantity in the cart
+  - Remove products from the cart
+
 ## Release 1.0 
 
 - It sets up the basic structure for backend and frontend
-- provides a product list feature
+- provides a product list feature  
 
 ## Project Structure
 - **Backend:** implemented in Spring Boot, located in `ecommerce-backend`
@@ -16,8 +23,13 @@
 The project uses a MySQL 8 container with an initialization script.
 
 ```bash
-cd ecommerce-prototype
+cd db
 docker-compose up --build
+```
+
+```bash
+cd db
+docker-compose down
 ```
 
 ### Start the backend 
