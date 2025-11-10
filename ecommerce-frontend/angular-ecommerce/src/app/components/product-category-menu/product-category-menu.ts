@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './product-category-menu.html',
   styleUrl: './product-category-menu.css',
 })
-export class ProductCategoryMenu implements OnInit {
+export class ProductCategoryMenuComponent implements OnInit {
 
   productCategories: ProductCategory[] = [];
 
