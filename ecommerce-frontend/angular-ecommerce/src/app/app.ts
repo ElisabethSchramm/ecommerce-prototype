@@ -1,10 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from './component/product-list/product-list';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { ProductListComponent } from './components/product-list/product-list';
+import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu';
+import { SearchComponent } from './components/search/search';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './components/cart-status/cart-status';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductListComponent], 
+  imports: [RouterOutlet, ProductCategoryMenuComponent, SearchComponent, NgbModule, CartStatusComponent, ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
