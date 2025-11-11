@@ -2,15 +2,21 @@
 
 ## Release 2.0
 - New **Cart CRUD Feature**:
-  - Add products to the cart
-  - View the cart
-  - Update product quantity in the cart
-  - Remove products from the cart
-
+    - **Cart CRUD Feature**:
+      - Add products to the cart
+      - View the cart
+      - Update product quantity in the cart
+      - Remove products from the cart
+    - **Cart Checkout Feature**:
+        - Proceed to checkout from the cart
+        - Fill in billing and shipping details
+        - Validate form inputs and place the order
+        - Send purchase details to the backend
+        - Persist orders and order items in the database
 ## Release 1.0 
 
 - It sets up the basic structure for backend and frontend
-- provides a product list feature  
+- Provides a **product list** feature
 
 ## Project Structure
 - **Backend:** implemented in Spring Boot, located in `ecommerce-backend`
