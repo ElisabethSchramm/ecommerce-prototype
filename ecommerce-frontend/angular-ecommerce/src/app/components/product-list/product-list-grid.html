@@ -3,11 +3,12 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- loop over the collection of products-->
-                <div *ngFor="let tempProduct of products" class="col-md-3">
+                @for (tempProduct of products; track tempProduct) {
+                <div class="col-md-3">
 
                     <div class="product-box">
                         <a [routerLink]="['/products', tempProduct.id]">
-                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive" alt="{{ tempProduct.name }}">
                         </a>
                         <a [routerLink]="['/products', tempProduct.id]">
                             <h1>{{ tempProduct.name }}</h1>
@@ -18,11 +19,13 @@
                     </div>
 
                 </div>
+                }
                 <!-- if products empty then display a message-->
-                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                @if (products.length === 0) {
+                <div class="alert alert-warning col-md-12" role="alert">
                     No products found.
                 </div>
-
+                }
             </div>
 
             <!-- begin footer -->

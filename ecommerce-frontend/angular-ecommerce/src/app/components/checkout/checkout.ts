@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,9 +21,15 @@ import { Myshopvalidators } from 'src/app/validators/myshopvalidators';
 })
 export class CheckoutComponent implements OnInit {
 
+  private formBuilder = inject(FormBuilder);
+  private myshopformService = inject(MyshopformService);
+  private cartService = inject(CartService);
+  private checkoutService = inject(CheckoutService);
+  private router = inject(Router);
+
   checkoutFormGroup!: FormGroup;
-  totalPrice: number = 0;
-  totalQuantity: number = 0;
+  totalPrice = 0;
+  totalQuantity = 0;
 
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
@@ -32,14 +38,6 @@ export class CheckoutComponent implements OnInit {
 
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private myshopformService: MyshopformService,
-    private cartService: CartService,
-    private checkoutService: CheckoutService,
-    private router: Router
-  ) { }
 
   ngOnInit(): void {
 
@@ -142,8 +140,10 @@ export class CheckoutComponent implements OnInit {
   get creditCardNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
   get creditCardSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
 
-  copyShippingAddressToBillingAddress(event: any) {
-    if (event.target.checked) {
+  copyShippingAddressToBillingAddress(event: Event) {
+    const checkbox = event.target as HTMLInputElement | null;
+
+    if (checkbox?.checked) {
       this.checkoutFormGroup.get('billingAddress')?.setValue(
         this.checkoutFormGroup.get('shippingAddress')?.value
       );
@@ -165,7 +165,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     // set up order
-    let order = new Order();
+    const order = new Order(0, 0);
     order.totalPrice = this.totalPrice;
     order.totalQuantity = this.totalQuantity;
 
@@ -173,10 +173,10 @@ export class CheckoutComponent implements OnInit {
     const cartItems = this.cartService.cartItems;
 
     // create orderItems from cartItems
-    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
+    const orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
 
     // set up purchase
-    let purchase = new Purchase();
+    const purchase = new Purchase();
 
     // populate purchase - customer
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
@@ -221,7 +221,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    
+
     // reset the form
     this.checkoutFormGroup.reset();
 
@@ -235,9 +235,9 @@ export class CheckoutComponent implements OnInit {
     if (!creditCardFormGroup) return;
 
     const currentYear: number = new Date().getFullYear();
-    const selectedYear: number = Number(creditCardFormGroup.value.expirationYear);
+    const selectedYear = Number(creditCardFormGroup.value.expirationYear);
 
-    let startMonth: number = (currentYear === selectedYear)
+    const startMonth: number = (currentYear === selectedYear)
       ? new Date().getMonth() + 1
       : 1;
 

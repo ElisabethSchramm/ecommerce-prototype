@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { CartDetailsComponent } from '../card-details/card-details';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,10 +11,10 @@ import { RouterLink } from '@angular/router';
 })
 export class CartStatusComponent implements OnInit {
 
-  totalPrice: number = 0.00;
-  totalQuantity: number = 0;
+  private cartService = inject(CartService);
 
-  constructor(private cartService: CartService) { }
+  totalPrice = 0.00;
+  totalQuantity = 0;
 
   ngOnInit(): void {
     this.updateCartStatus();
@@ -33,5 +32,4 @@ export class CartStatusComponent implements OnInit {
       data => this.totalQuantity = data
     );
   }
-
 }

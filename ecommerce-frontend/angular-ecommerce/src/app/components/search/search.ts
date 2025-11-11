@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,12 +7,9 @@ import { Router } from '@angular/router';
   templateUrl: './search.html',
   styleUrl: './search.css',
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
+  private router = inject(Router);
 
   doSearch(value: string) {
     console.log(`value=${value}`);

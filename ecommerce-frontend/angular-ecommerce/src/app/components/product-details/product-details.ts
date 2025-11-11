@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product';
 import { CommonModule, CurrencyPipe } from '@angular/common';
@@ -14,11 +14,12 @@ import { CartItem } from 'src/app/common/cart-item';
 })
 export class ProductDetailsComponent implements OnInit {
 
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
+  private route = inject(ActivatedRoute);
+
   product: Product = new Product();
 
-  constructor(private productService: ProductService,
-              private cartService: CartService,
-              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -39,11 +40,13 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart() {
+    if (!this.product) {
+      console.warn("Product is not loaded yet!");
+      return;
+    }
 
     console.log(`Adding to cart: ${this.product.name}, ${this.product.unitPrice}`);
     const theCartItem = new CartItem(this.product);
     this.cartService.addToCart(theCartItem);
-    
   }
-
 }

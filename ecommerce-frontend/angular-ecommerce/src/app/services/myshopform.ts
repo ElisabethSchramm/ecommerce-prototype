@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Country } from '../common/country';
 import { State } from '../common/state';
@@ -11,10 +11,10 @@ import { map } from 'rxjs/operators';
 })
 export class MyshopformService {
 
+  private httpClient = inject(HttpClient);
+
   private countriesUrl = 'http://localhost:8080/api/countries';
   private statesUrl = 'http://localhost:8080/api/states';
-  
-  constructor(private httpClient: HttpClient) { }
 
   getCountries(): Observable<Country[]> {
 
@@ -25,7 +25,6 @@ export class MyshopformService {
 
   getStates(theCountryCode: string): Observable<State[]> {
 
-    // search url
     const searchStatesUrl = `${this.statesUrl}/search/findByCountryCode?code=${theCountryCode}`;
 
     return this.httpClient.get<GetResponseStates>(searchStatesUrl).pipe(
@@ -35,7 +34,7 @@ export class MyshopformService {
 
   getCreditCardMonths(startMonth: number): Observable<number[]> {
 
-    let data: number[] = [];
+    const data: number[] = [];
     
     // build an array for "Month" dropdown list
     // - start at current month and loop until 
@@ -49,7 +48,7 @@ export class MyshopformService {
 
   getCreditCardYears(): Observable<number[]> {
 
-    let data: number[] = [];
+    const data: number[] = [];
 
     // build an array for "Year" downlist list
     // - start at current year and loop for next 10 years

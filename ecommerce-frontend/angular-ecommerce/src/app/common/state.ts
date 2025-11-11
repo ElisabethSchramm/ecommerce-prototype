@@ -1,4 +1,5 @@
 export class State {
-    id: number = 0;
-    name: string = "";
+    constructor(
+        public id: number,
+        public name: string) { }
 }

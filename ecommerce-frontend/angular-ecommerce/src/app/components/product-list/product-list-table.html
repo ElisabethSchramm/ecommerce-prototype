@@ -10,14 +10,15 @@
     </thead>
 
     <tbody>
-        <tr *ngFor="let tempProduct of products">
+        @for (tempProduct of products; track tempProduct) {
+        <tr>
             <td class="align-middle">
                 <img [src]="tempProduct.imageUrl" height="50" alt="{{ tempProduct.name }}" />
             </td>
-            <td class="align-middle">{{ tempProduct.name}}</td>
-            <td class="align-middle">{{ tempProduct.unitPrice | currency:'USD'}}</td>
-            <td class="align-middle">{{ tempProduct.unitsInStock}}</td>
+            <td class="align-middle">{{ tempProduct.name }}</td>
+            <td class="align-middle">{{ tempProduct.unitPrice | currency:'USD' }}</td>
+            <td class="align-middle">{{ tempProduct.unitsInStock }}</td>
         </tr>
-
+        }
     </tbody>
 </table>

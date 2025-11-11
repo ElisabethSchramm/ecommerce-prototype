@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list';
+import { RouterOutlet } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu';
 import { SearchComponent } from './components/search/search';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

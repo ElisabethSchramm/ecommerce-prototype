@@ -1,12 +1,12 @@
 export class Product {
-  id: string = '';
-  sku: string = '';
-  name: string = '';
-  description: string = '';
-  unitPrice: number = 0;
-  imageUrl: string = '';
-  active: boolean = true;
-  unitsInStock: number = 0;
-  dateCreated: Date = new Date();
-  lastUpdated: Date = new Date();
+    public id!: string;
+    public sku!: string;
+    public name!: string;
+    public description!: string;
+    public unitPrice!: number;
+    public imageUrl!: string;
+    public active!: boolean;
+    public unitsInStock!: number;
+    public dateCreated!: Date;
+    public lastUpdate!: Date;
 }

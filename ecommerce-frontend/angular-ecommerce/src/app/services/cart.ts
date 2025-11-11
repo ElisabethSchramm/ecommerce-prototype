@@ -12,12 +12,10 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
-
   addToCart(theCartItem: CartItem) {
 
     // check if we already have the item in our cart
-    let alreadyExistsInCart: boolean = false;
+    let alreadyExistsInCart = false;
     let existingCartItem: CartItem | undefined;
 
     if (this.cartItems.length > 0) {
@@ -44,10 +42,10 @@ export class CartService {
 
   computeCartTotals() {
 
-    let totalPriceValue: number = 0;
-    let totalQuantityValue: number = 0;
+    let totalPriceValue = 0;
+    let totalQuantityValue = 0;
 
-    for (let currentCartItem of this.cartItems) {
+    for (const currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
       totalQuantityValue += currentCartItem.quantity;
     }
@@ -63,7 +61,7 @@ export class CartService {
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
 
     console.log('Contents of the cart');
-    for (let tempCartItem of this.cartItems) {
+    for (const tempCartItem of this.cartItems) {
       const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
       console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice=${tempCartItem.unitPrice}, subTotalPrice=${subTotalPrice}`);
     }
