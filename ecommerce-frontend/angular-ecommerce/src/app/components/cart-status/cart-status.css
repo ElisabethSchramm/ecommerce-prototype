@@ -1,0 +1,20 @@
+/* Keep cart-status vertically aligned with header and with login status */
+:host {
+	display: flex;
+	align-items: center;
+}
+
+.cart-area a {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cart-area .total {
+	margin: 0; /* remove floats/margins that shift layout */
+}
+
+.cart-area i {
+	margin: 0 0 0 8px;
+}
+

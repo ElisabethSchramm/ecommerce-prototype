@@ -1,0 +1,43 @@
+.security-btn {
+    display: inline-block;
+    position: relative;
+    right: 0;
+    min-width: 95px;
+    color: #fff;
+    border: 1px solid #205b8d;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 43px;
+    background: #205b8d;
+    line-height: 43px;
+    padding: 0 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.login-status-header{
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-moz-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.login-status-user-info {
+    line-height:43px;
+    border:1px;
+    padding:0 17px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-transition:all .5s ease;
+    -o-transition:all .5s ease;
+    -moz-transition:all .5s ease;
+    transition:all .5s ease
+}

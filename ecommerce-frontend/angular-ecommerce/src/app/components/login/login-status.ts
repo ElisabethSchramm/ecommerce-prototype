@@ -1,0 +1,54 @@
+import { Component, inject, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AuthService } from '@auth0/auth0-angular';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-login-status',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './login-status.html',
+  styleUrl: './login-status.css',
+})
+export class LoginStatus {
+
+  isAuthenticated: boolean = false;
+  profileJson: string | undefined;
+  userEmail: string | undefined;
+  storage: Storage = sessionStorage;
+
+  private auth = inject(AuthService);
+  private doc = inject(DOCUMENT);
+
+
+  ngOnInit(): void {
+    this.auth.isAuthenticated$.subscribe(
+      (authenticated: boolean) => {
+        this.isAuthenticated = authenticated;
+        console.log('User is authenticated: ', this.isAuthenticated);
+      }
+    );
+    this.auth.user$.subscribe(
+      (user) => {
+        this.userEmail = user?.email;
+         // now store the email in browser storage
+         this.storage.setItem('userEmail', JSON.stringify(this.userEmail));
+        console.log('User ID: ', this.userEmail);
+      }
+    );
+  }
+
+  login() {
+    this.auth.loginWithRedirect();
+  }
+
+  logout(): void {
+    // this.auth.logout({ returnTo: this.doc.location.origin });
+    this.auth.logout({
+      logoutParams: {
+        returnTo: this.doc.location.origin
+      }
+    });
+  }
+
+}

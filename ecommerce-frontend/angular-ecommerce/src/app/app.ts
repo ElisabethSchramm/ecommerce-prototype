@@ -5,10 +5,18 @@ import { SearchComponent } from './components/search/search';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginStatus } from "./components/login/login-status";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductCategoryMenuComponent, SearchComponent, NgbModule, CartStatusComponent, ReactiveFormsModule],
+  imports: [
+    RouterOutlet,
+    ProductCategoryMenuComponent,
+    SearchComponent,
+    NgbModule,
+    CartStatusComponent,
+    ReactiveFormsModule,
+    LoginStatus],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

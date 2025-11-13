@@ -267,7 +267,10 @@ input.au-input.au-input-xl {
     border: 1px solid #0da8e4;
     float: left;
     margin-top: 7px;
-    padding-left: 17px
+    padding-left: 17px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .total span {
