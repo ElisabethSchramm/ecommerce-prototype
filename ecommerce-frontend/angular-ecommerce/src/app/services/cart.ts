@@ -12,18 +12,42 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
+  private readonly STORAGE_KEY = 'cartItems';
+
+  constructor() {
+    const storedData = localStorage.getItem(this.STORAGE_KEY);
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        this.cartItems = parsedData;
+        this.computeCartTotals();
+      } catch (error) {
+        console.error('CartItmens - localStorage:', error);
+        this.cartItems = [];
+      }
+    } else {
+      this.cartItems = [];
+    }
+  }
+
+  persistCartItems(): void {
+    try {
+      const serialized = JSON.stringify(this.cartItems);
+      localStorage.setItem('cartItems', serialized);
+    } catch (error) {
+    }
+  }
+
   addToCart(theCartItem: CartItem) {
 
-    // check if we already have the item in our cart
     let alreadyExistsInCart = false;
     let existingCartItem: CartItem | undefined;
 
     if (this.cartItems.length > 0) {
       // find the item in the cart based on item id
 
-      existingCartItem = this.cartItems.find( tempCartItem => tempCartItem.id === theCartItem.id );
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
 
-      // check if we found it
       alreadyExistsInCart = (existingCartItem != undefined);
     }
 
@@ -50,12 +74,14 @@ export class CartService {
       totalQuantityValue += currentCartItem.quantity;
     }
 
-    // publish the new values ... all subscribers will receive the new data
+    // publish the new values
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
     // log cart data just for debugging purposes
     this.logCartData(totalPriceValue, totalQuantityValue);
+
+    this.persistCartItems();
   }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
@@ -85,7 +111,7 @@ export class CartService {
   remove(theCartItem: CartItem) {
 
     // get index of item in the array
-    const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id );
+    const itemIndex = this.cartItems.findIndex(tempCartItem => tempCartItem.id === theCartItem.id);
 
     // if found, remove the item from the array at the given index
     if (itemIndex > -1) {
