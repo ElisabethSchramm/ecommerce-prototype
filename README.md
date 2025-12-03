@@ -23,19 +23,14 @@
 - - Entry point: `src/main/java/com/example/ecommerce/SpringBootEcommerceApplication.java`
 - **Frontend:** implemented in AngularJS, located in ecommerce-frontend
 
-## How to Run
+## DEV-Setup
 
-### Start the Database (Docker)
+### Start MySQL (Docker)
 The project uses a MySQL 8 container with an initialization script.
 
 ```bash
-cd db
-docker-compose up --build
-```
-
-```bash
-cd db
-docker-compose down
+# from project root
+docker-compose -f docker-compose.dev.yml up
 ```
 
 ### Start the backend 
@@ -48,6 +43,7 @@ mvnw.cmd spring-boot:run # on Windows
 
 ### Start the frontend
 ```bash
+# from project root
 cd ecommerce-frontend/angular-ecommerce
 npm install
 ng serve
@@ -56,5 +52,6 @@ ng serve
 ### Access the application
 Open your browser and go to:
 ```
-http://localhost:4200/
+http://localhost:8080/api
+http://localhost:4200/products
 ```
