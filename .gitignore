@@ -41,3 +41,5 @@ ecommerce-backend/.vscode/
 ecommerce-frontend/angular-ecommerce/.vscode
 ecommerce-frontend/angular-ecommerce/src/app/ecommerce-prototype.code-workspace
 ecommerce-prototype.code-workspace
+
+/.db
